@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  exam.webapi:
+    image: ${DOCKER_REGISTRY-}examwebapi
+    build:
+      context: .
+      dockerfile: src/Exam.WebApi/Dockerfile
+
+  postgres:
+    container_name: 'postgres'
+    image: postgres
+    ports:
+      - "7777:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=Marketplace

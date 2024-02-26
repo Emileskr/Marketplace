@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+	<!-- Table: items -->
+	<changeSet id="createTableItems" author="Emile">
+		<createTable tableName="items">
+			<column name="id" type="serial">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="name" type="varchar(255)"/>
+		</createTable>
+	</changeSet>
+
+	<!-- Table: users -->
+	<changeSet id="createTableUsers" author="Emile">
+		<createTable tableName="users">
+			<column name="id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="name" type="varchar(255)"/>
+			<column name="email" type="varchar(255)"/>
+		</createTable>
+	</changeSet>
+
+	<!-- Table: orders -->
+	<changeSet id="createTableOrders" author="Emile">
+		<createTable tableName="orders">
+			<column name="id" type="serial">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="item_id" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="user_id" type="int">
+				<constraints nullable="false"/>
+			</column>
+			<column name="created_at" type="timestamp" defaultValueComputed="now()">
+				<constraints nullable="false"/>
+			</column>
+			<column name="status" type="varchar(255)"/>
+			<column name="delete_at" type="timestamp"/>
+		</createTable>
+	</changeSet>
+
+		<!-- Add Foreign Key Constraint for orders.item_id -->
+		<changeSet id="addFKConstraintOrdersItemId" author="Emile">
+			<addForeignKeyConstraint baseTableName="orders" baseColumnNames="item_id"
+									 referencedTableName="items" referencedColumnNames="id"
+									 constraintName="fk_orders_items"/>
+		</changeSet>
+
+		<!-- Add Foreign Key Constraint for orders.user_id -->
+		<changeSet id="addFKConstraintOrdersUserId" author="Emile">
+			<addForeignKeyConstraint baseTableName="orders" baseColumnNames="user_id"
+									 referencedTableName="users" referencedColumnNames="id"
+									 constraintName="fk_orders_users"/>
+		</changeSet>
+
+	<!-- Insert Data into items -->
+	<changeSet id="insertDataIntoItems" author="Emile">
+		<insert tableName="items">
+			<column name="name" value="Swimmin suit"/>
+		</insert>
+		<insert tableName="items">
+			<column name="name" value="Sewing kit"/>
+		</insert>
+		<insert tableName="items">
+			<column name="name" value="Trombone"/>
+		</insert>
+		<insert tableName="items">
+			<column name="name" value="Notebook"/>
+		</insert>
+		<insert tableName="items">
+			<column name="name" value="Pillow"/>
+		</insert>
+		<insert tableName="items">
+			<column name="name" value="Bracelet"/>
+		</insert>
+	</changeSet>
+
+</databaseChangeLog>
