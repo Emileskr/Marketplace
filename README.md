@@ -13,10 +13,6 @@ This RESTful API is designed to handle order functionality for an online marketp
   - [Automatic Deletion of Unpaid Orders](#automatic-deletion-of-unpaid-orders)
   - [Retrieving User's Orders](#retrieving-users-orders)
 - [API Endpoints](#api-endpoints)
-- [Dependencies](#dependencies)
-- [Docker](#docker)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Getting Started
 
